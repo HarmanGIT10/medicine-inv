@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manage Shops</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f0f2f5;
+            color: #333;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 40px auto;
+            padding: 20px;
+        }
+
+        h1 {
+            color: #2c3e50;
+            margin-bottom: 20px;
+        }
+
+        button {
+            background-color: #2c3e50;
+            color: white;
+            border: none;
+            padding: 10px 16px;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #34495e;
+        }
+
+        .card {
+            background-color: white;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .card input {
+            width: 100%;
+            margin: 8px 0;
+            padding: 8px;
+            font-size: 15px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+        }
+
+        .card-buttons {
+            margin-top: 10px;
+        }
+
+        .card-buttons button {
+            margin-right: 10px;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-content {
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            width: 90%;
+            max-width: 500px;
+        }
+
+        .modal-content input {
+            width: 100%;
+            margin: 10px 0;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>Your Stores</h1>
+        <button onclick="openAddModal()">Add Shop</button>
+        <div id="storeList"></div>
+    </div>
+
+    <!-- Add Shop Modal -->
+    <div class="modal" id="addShopModal">
+        <div class="modal-content">
+            <h2>Add Shop</h2>
+            <input id="storeName" placeholder="Store Name">
+            <input id="ownerName" placeholder="Owner Name">
+            <input id="shopkeeperName" placeholder="Shopkeeper Name"><!DOCTYPE html>
+            <html lang="en">
+            
+            <head>
+                <meta charset="UTF-8">
+                <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                <title>Manage Shops</title>
+                <style>
+                    body {
+                        margin: 0;
+                        padding: 0;
+                        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+                        background-color: #f0f2f5;
+                        color: #333;
+                    }
+            
+                    .container {
+                        max-width: 1000px;
+                        margin: 40px auto;
+                        padding: 20px;
+                    }
+            
+                    h1 {
+                        color: #2c3e50;
+                        margin-bottom: 20px;
+                    }
+            
+                    button {
+                        background-color: #2c3e50;
+                        color: white;
+                        border: none;
+                        padding: 10px 16px;
+                        border-radius: 6px;
+                        cursor: pointer;
+                        transition: background-color 0.3s ease;
+                    }
+            
+                    button:hover {
+                        background-color: #34495e;
+                    }
+            
+                    .card {
+                        background-color: white;
+                        padding: 20px;
+                        margin-bottom: 20px;
+                        border-radius: 12px;
+                        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+                    }
+            
+                    .card input {
+                        width: 100%;
+                        margin: 8px 0;
+                        padding: 8px;
+                        font-size: 15px;
+                        border: 1px solid #ccc;
+                        border-radius: 6px;
+                    }
+            
+                    .card-buttons {
+                        margin-top: 10px;
+                    }
+            
+                    .card-buttons button {
+                        margin-right: 10px;
+                    }
+            
+                    .modal {
+                        display: none;
+                        position: fixed;
+                        top: 0;
+                        left: 0;
+                        width: 100%;
+                        height: 100%;
+                        background: rgba(0, 0, 0, 0.5);
+                        justify-content: center;
+                        align-items: center;
+                    }
+            
+                    .modal-content {
+                        background: white;
+                        padding: 20px;
+                        border-radius: 12px;
+                        width: 90%;
+                        max-width: 500px;
+                    }
+            
+                    .modal-content input {
+                        width: 100%;
+                        margin: 10px 0;
+                        padding: 10px;
+                        border: 1px solid #ccc;
+                        border-radius: 8px;
+                    }
+                </style>
+            </head>
+            
+            <body>
+                <div class="container">
+                    <h1>Your Stores</h1>
+                    <button onclick="openAddModal()">Add Shop</button>
+                    <div id="storeList"></div>
+                </div>
+            
+                <!-- Add Shop Modal -->
+                <div class="modal" id="addShopModal">
+                    <div class="modal-content">
+                        <h2>Add Shop</h2>
+                        <input id="storeName" placeholder="Store Name">
+                        <input id="ownerName" placeholder="Owner Name">
+                        <input id="shopkeeperName" placeholder="Shopkeeper Name">
+                        <input id="contact" placeholder="Contact">
+                        <input id="address" placeholder="Address">
+                        <button onclick="submitShop()">Submit</button>
+                        <button onclick="closeAddModal()">Cancel</button>
+                    </div>
+                </div>
+            
+                <script>
+                    function openAddModal() {
+                        document.getElementById('addShopModal').style.display = 'flex';
+                    }
+            
+                    function closeAddModal() {
+                        document.getElementById('addShopModal').style.display = 'none';
+                    }
+            
+                    async function submitShop() {
+                        const shopData = {
+                            store_name: document.getElementById('storeName').value,
+                            owner_name: document.getElementById('ownerName').value,
+                            shopkeeper_name: document.getElementById('shopkeeperName').value,
+                            contact: document.getElementById('contact').value,
+                            address: document.getElementById('address').value
+                        };
+            
+                        const res = await fetch('/create_store', {
+                            method: 'POST',
+                            headers: { 'Content-Type': 'application/json' },
+                            body: JSON.stringify(shopData)
+                        });
+                        const data = await res.json();
+            
+                        if (data.success) {
+                            closeAddModal();
+                            loadStores();
+                        } else {
+                            alert("Error: " + data.message);
+                        }
+                    }
+            
+                    async function loadStores() {
+                        const res = await fetch('/get_stores');
+                        const data = await res.json();
+                        const storeList = document.getElementById('storeList');
+                        storeList.innerHTML = '';
+            
+                        if (!data.success) {
+                            storeList.innerHTML = '<p>No stores found.</p>';
+                            return;
+                        }
+            
+                        data.stores.forEach(store => {
+                            const card = document.createElement('div');
+                            card.className = 'card';
+            
+                            card.innerHTML = `
+                                <input type="text" value="${store.store_name}" id="name-${store.store_id}" disabled>
+                                <input type="text" value="${store.owner_name}" id="owner-${store.store_id}" disabled>
+                                <input type="text" value="${store.shopkeeper_name}" id="keeper-${store.store_id}" disabled>
+                                <input type="text" value="${store.contact}" id="contact-${store.store_id}" disabled>
+                                <input type="text" value="${store.address}" id="address-${store.store_id}" disabled>
+                                <div class="card-buttons">
+                                    <button onclick="enableEdit('${store.store_id}')">Update</button>
+                                    <button onclick="goToInventory('${store.store_id}')">Manage Inventory</button>
+                                </div>
+                            `;
+            
+                            storeList.appendChild(card);
+                        });
+                    }
+            
+                    function enableEdit(id) {
+                        ["name", "owner", "keeper", "contact", "address"].forEach(field => {
+                            document.getElementById(`${field}-${id}`).disabled = false;
+                        });
+            
+                        const updateBtn = document.querySelector(`#name-${id}`).parentNode.querySelector('button');
+                        updateBtn.innerText = "Save";
+                        updateBtn.onclick = () => saveUpdate(id);
+                    }
+            
+                    async function saveUpdate(id) {
+                        const updatedData = {
+                            store_id: id,
+                            store_name: document.getElementById(`name-${id}`).value,
+                            owner_name: document.getElementById(`owner-${id}`).value,
+                            shopkeeper_name: document.getElementById(`keeper-${id}`).value,
+                            contact: document.getElementById(`contact-${id}`).value,
+                            address: document.getElementById(`address-${id}`).value
+                        };
+            
+                        const res = await fetch('/update_store', {
+                            method: 'POST',
+                            headers: { 'Content-Type': 'application/json' },
+                            body: JSON.stringify(updatedData)
+                        });
+            
+                        const data = await res.json();
+                        if (data.success) {
+                            loadStores();
+                        } else {
+                            alert("Update failed");
+                        }
+                    }
+            
+                    function goToInventory(storeId) {
+                        window.location.href = `/manage_inventory/${storeId}`;
+                    }
+            
+                    window.onload = loadStores;
+                </script>
+            </body>
+            
+            </html>
+            
+            <input id="contact" placeholder="Contact">
+            <input id="address" placeholder="Address">
+            <button onclick="submitShop()">Submit</button>
+            <button onclick="closeAddModal()">Cancel</button>
+        </div>
+    </div>
+
+    <script>
+        function openAddModal() {
+            document.getElementById('addShopModal').style.display = 'flex';
+        }
+
+        function closeAddModal() {
+            document.getElementById('addShopModal').style.display = 'none';
+        }
+
+        async function submitShop() {
+            const shopData = {
+                store_name: document.getElementById('storeName').value,
+                owner_name: document.getElementById('ownerName').value,
+                shopkeeper_name: document.getElementById('shopkeeperName').value,
+                contact: document.getElementById('contact').value,
+                address: document.getElementById('address').value
+            };
+
+            const res = await fetch('/create_store', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(shopData)
+            });
+            const data = await res.json();
+
+            if (data.success) {
+                closeAddModal();
+                loadStores();
+            } else {
+                alert("Error: " + data.message);
+            }
+        }
+
+        async function loadStores() {
+            const res = await fetch('/get_stores');
+            const data = await res.json();
+            const storeList = document.getElementById('storeList');
+            storeList.innerHTML = '';
+
+            if (!data.success) {
+                storeList.innerHTML = '<p>No stores found.</p>';
+                return;
+            }
+
+            data.stores.forEach(store => {
+                const card = document.createElement('div');
+                card.className = 'card';
+
+                card.innerHTML = `
+                    <input type="text" value="${store.store_name}" id="name-${store.store_id}" disabled>
+                    <input type="text" value="${store.owner_name}" id="owner-${store.store_id}" disabled>
+                    <input type="text" value="${store.shopkeeper_name}" id="keeper-${store.store_id}" disabled>
+                    <input type="text" value="${store.contact}" id="contact-${store.store_id}" disabled>
+                    <input type="text" value="${store.address}" id="address-${store.store_id}" disabled>
+                    <div class="card-buttons">
+                        <button onclick="enableEdit('${store.store_id}')">Update</button>
+                        <button onclick="goToInventory('${store.store_id}')">Manage Inventory</button>
+                    </div>
+                `;
+
+                storeList.appendChild(card);
+            });
+        }
+
+        function enableEdit(id) {
+            ["name", "owner", "keeper", "contact", "address"].forEach(field => {
+                document.getElementById(`${field}-${id}`).disabled = false;
+            });
+
+            const updateBtn = document.querySelector(`#name-${id}`).parentNode.querySelector('button');
+            updateBtn.innerText = "Save";
+            updateBtn.onclick = () => saveUpdate(id);
+        }
+
+        async function saveUpdate(id) {
+            const updatedData = {
+                store_id: id,
+                store_name: document.getElementById(`name-${id}`).value,
+                owner_name: document.getElementById(`owner-${id}`).value,
+                shopkeeper_name: document.getElementById(`keeper-${id}`).value,
+                contact: document.getElementById(`contact-${id}`).value,
+                address: document.getElementById(`address-${id}`).value
+            };
+
+            const res = await fetch('/update_store', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(updatedData)
+            });
+
+            const data = await res.json();
+            if (data.success) {
+                loadStores();
+            } else {
+                alert("Update failed");
+            }
+        }
+
+        function goToInventory(storeId) {
+            window.location.href = `/manage_inventory/${storeId}`;
+        }
+
+        window.onload = loadStores;
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,719 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shopkeeper Dashboard</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f0f2f5;
+            color: #333;
+        }
+
+        nav {
+            background-color: #2c3e50;
+            color: white;
+            display: flex;
+            justify-content: space-around;
+            padding: 15px 0;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+            font-weight: 500;
+        }
+
+        nav a:hover {
+            background-color: #34495e;
+        }
+
+        .content {
+            max-width: 800px;
+            margin: 40px auto;
+            padding: 20px;
+            background-color: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .content h1 {
+            color: #2c3e50;
+        }
+
+        .profile,
+        .orders {
+            margin-top: 20px;
+        }
+
+        .edit-form {
+            margin-top: 20px;
+        }
+
+        .edit-form input,
+        .edit-form select {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            box-sizing: border-box;
+            font-size: 16px;
+        }
+
+        .edit-form button {
+            background-color: #2c3e50;
+            color: white;
+            padding: 12px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s ease;
+            margin-top: 10px;
+        }
+
+        .edit-form button:hover {
+            background-color: #34495e;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f0f2f5;
+            color: #333;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 40px auto;
+            padding: 20px;
+        }
+
+        h1 {
+            color: #2c3e50;
+            margin-bottom: 20px;
+        }
+
+        button {
+            background-color: #2c3e50;
+            color: white;
+            border: none;
+            padding: 10px 16px;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #34495e;
+        }
+
+        .card {
+            background-color: white;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .card input {
+            width: 100%;
+            margin: 8px 0;
+            padding: 8px;
+            font-size: 15px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+        }
+
+        .card-buttons {
+            margin-top: 10px;
+        }
+
+        .card-buttons button {
+            margin-right: 10px;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-content {
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            width: 90%;
+            max-width: 500px;
+        }
+
+        .modal-content input {
+            width: 85%;
+            margin: 10px 0;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+        }
+
+        #store-cards-container {
+            background-color: #ffffffe1;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 5px;
+            padding: 10px;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+
+        }
+
+        .store-card {
+            border-radius: 5px;
+            padding: 10px;
+            background-color: rgba(195, 195, 202, 0.399);
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            background: rgba(0, 0, 0, 0.4);
+            width: 100%;
+            height: 100%;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+
+        .modal-content {
+            background: #fff;
+            padding: 20px;
+            border-radius: 10px;
+        }
+/* Custom Scrollbar Styling */
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background: #ecf0f1;  /* light gray */
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: #2c3e50;  /* dark blue */
+    border-radius: 10px;
+    border: 2px solid #ecf0f1;  /* space around thumb */
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background-color: #34495e;  /* slightly lighter on hover */
+}
+
+
+        @media screen and (max-width: 768px) {
+            .content {
+                margin: 20px;
+                padding: 15px;
+            }
+
+            nav {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            nav a {
+                margin: 5px 0;
+            }
+
+        }
+    </style>
+</head>
+
+<body>
+    <input type="hidden" id="shopkeeperId" value="{{ shopkeeper_id }}">
+
+    <nav>
+        <a href="#home" onclick="showSection('home')">Home</a>
+        <a href="#profile" onclick="showSection('profile')">Profile</a>
+        <a href="#shop" onclick="showSection('shop')">Shop</a>
+        <a href="#orders" onclick="showSection('orders')">Orders</a>
+        <a href="/logout" onclick="logout()">Logout</a>
+    </nav>
+
+    <div class="content">
+        <!-- Home Section -->
+        <!-- Home Section -->
+        <div id="home" class="home">
+            <h1>Welcome, Shopkeeper!</h1>
+            <p>Manage your profile and shop inventory.</p>
+            <ul id="newsList" style="margin-top: 20px;"></ul>
+        </div>
+
+
+        <!-- Profile Section -->
+        <div id="profile" class="profile" style="display: none;">
+            <h1>Your Profile</h1>
+            <p><strong>Name:</strong> Loading...</p>
+            <p><strong>Email:</strong> Loading...</p>
+            <p><strong>Phone:</strong> Loading...</p>
+            <p><strong>Shop Name:</strong> Loading...</p>
+            <p><strong>Contact:</strong> Loading...</p>
+            <p><strong>Address:</strong> Loading...</p>
+
+            <h2>Edit Profile</h2>
+            <form id="editProfileForm" class="edit-form">
+                <input type="text" id="editName" placeholder="Edit Name">
+                <input type="email" id="editEmail" placeholder="Edit Email">
+                <input type="text" id="editPhone" placeholder="Edit Phone">
+                <input type="text" id="editShopName" placeholder="Edit Shop Name">
+                <input type="text" id="editContact" placeholder="Edit Contact">
+                <input type="text" id="editAddress" placeholder="Edit Address">
+                <button type="button" onclick="updateProfile()">Save Changes</button>
+            </form>
+        </div>
+
+        <!-- Shop Section -->
+        <div id="shop" class="shop" style="display: none;">
+            <div class="container">
+                <h1>Your Stores</h1>
+                <button onclick="openAddModal()">Add Shop</button>
+                <div id="storeList"></div>
+            </div>
+
+            <!-- Add Shop Modal -->
+            <div class="modal" id="addShopModal">
+                <div class="modal-content">
+                    <h2>Add Shop</h2>
+                    <input id="storeName" placeholder="Store Name">
+                    <input id="ownerName" placeholder="Owner Name">
+                    <input id="shopkeeperName" placeholder="Shopkeeper Name">
+                    <input id="contact" placeholder="Contact">
+                    <input id="address" placeholder="Address">
+                    <button onclick="submitShop()">Submit</button>
+                    <button onclick="closeAddModal()">Cancel</button>
+                </div>
+            </div>
+            <div id="store-cards-container"></div>
+            <!-- Add this to your shop section -->
+
+        </div>
+        <div id="inventoryPanel" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background-color: white;
+        color: #333; overflow:auto; z-index:1000; padding:20px; box-sizing:border-box; border-radius: 8px; 
+        box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.3); font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;">
+
+            <h2 id="storeTitle" style="font-size: 26px; margin-bottom: 20px; color: #2c3e50;">Store Inventory</h2>
+
+            <button onclick="closeInventoryPanel()"
+                style="float:right; background-color: #2c3e50; color: white; border:none; padding:12px 18px; cursor:pointer; font-size:18px; border-radius:6px; transition: background-color 0.3s ease;">
+                X
+            </button>
+
+            <h3 style="font-size: 24px; margin-top: 20px; color: #2c3e50;">Add Medicine</h3>
+            <div style="margin-top: 20px;">
+                <input id="medicineName" placeholder="Medicine Name"
+                    style="width:90%; padding:12px; margin:8px 0; border:1px solid #ccc; border-radius:6px; font-size:16px;">
+                <input id="brand" placeholder="Brand"
+                    style="width:90%; padding:12px; margin:8px 0; border:1px solid #ccc; border-radius:6px; font-size:16px;">
+                <input id="price" type="number" placeholder="Price"
+                    style="width:90%; padding:12px; margin:8px 0; border:1px solid #ccc; border-radius:6px; font-size:16px;">
+                <input id="quantity" type="number" placeholder="Quantity"
+                    style="width:90%; padding:12px; margin:8px 0; border:1px solid #ccc; border-radius:6px; font-size:16px;">
+                <input id="symptoms" placeholder="Symptoms (comma separated)"
+                    style="width:90%; padding:12px; margin:8px 0; border:1px solid #ccc; border-radius:6px; font-size:16px;">
+                <button onclick="addMedicine()"
+                    style="background-color: #2c3e50; color:white; padding:14px; font-size:18px; width:100%; border:none; border-radius:6px; cursor:pointer; margin-top:15px; transition: background-color 0.3s ease;">
+                    Add Medicine
+                </button>
+            </div>
+
+            <h3 style="font-size: 24px; margin-top: 40px; color: #2c3e50;">Inventory List</h3>
+            <div id="inventoryCards" style="display:flex; flex-wrap:wrap; gap:16px; margin-top:20px;"></div>
+        </div>
+
+
+
+
+    </div>
+
+
+    <script>
+        function showSection(section) {
+            const sections = ['home', 'profile', 'shop'];
+            sections.forEach(sec => {
+                document.getElementById(sec).style.display = 'none';
+            });
+            document.getElementById(section).style.display = 'block';
+
+            if (section === 'profile') {
+                fetchProfileData();
+            } else if (section === 'home') {
+                fetchNews();
+            } else if (section === 'shop') {
+                loadStores();
+            }
+        }
+
+        showSection('home');
+
+        function fetchProfileData() {
+            fetch('/shop_profile')
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        const profile = data.profile_data;
+
+                        document.querySelector('#profile').innerHTML = `
+                <h1>Your Profile</h1>
+                <p><strong>Name:</strong> ${profile.name}</p>
+                <p><strong>Email:</strong> ${profile.email}</p>
+                <p><strong>Phone:</strong> ${profile.phone}</p>
+                <p><strong>Shop Name:</strong> ${profile.shop_name}</p>
+                <p><strong>Contact:</strong> ${profile.contact}</p>
+                <p><strong>Address:</strong> ${profile.address}</p>
+
+                <h2>Edit Profile</h2>
+                <form id="editProfileForm" class="edit-form">
+                    <input type="text" id="editName" placeholder="Edit Name" value="${profile.name}">
+                    <input type="email" id="editEmail" placeholder="Edit Email" value="${profile.email}">
+                    <input type="text" id="editPhone" placeholder="Edit Phone" value="${profile.phone}">
+                    <input type="text" id="editShopName" placeholder="Edit Shop Name" value="${profile.shop_name}">
+                    <input type="text" id="editContact" placeholder="Edit Contact" value="${profile.contact}">
+                    <input type="text" id="editAddress" placeholder="Edit Address" value="${profile.address}">
+                    <button type="button" onclick="updateProfile()">Save Changes</button>
+                </form>
+            `;
+                    } else {
+                        alert("Failed to load profile: " + data.message);
+                    }
+                });
+        }
+
+        function updateProfile() {
+            const updatedData = {
+                name: document.getElementById('editName').value,
+                email: document.getElementById('editEmail').value,
+                phone: document.getElementById('editPhone').value,
+                shop_name: document.getElementById('editShopName').value,
+                contact: document.getElementById('editContact').value,
+                address: document.getElementById('editAddress').value
+            };
+
+            fetch('/shop_profile', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(updatedData)
+            })
+                .then(res => res.json())
+                .then(data => {
+                    if (data.success) {
+                        alert("Profile updated successfully!");
+                        fetchProfileData();
+                    } else {
+                        alert("Failed to update profile: " + data.message);
+                    }
+                });
+        }
+
+        async function fetchNews() {
+            try {
+                const res = await fetch("/get_health_news");
+                const data = await res.json();
+
+                const newsList = document.getElementById("newsList");
+                newsList.innerHTML = "";
+
+                if (!data.success || !data.articles) {
+                    newsList.innerHTML = "<li>Failed to load news.</li>";
+                    return;
+                }
+
+                data.articles.forEach((article) => {
+                    const listItem = document.createElement("li");
+                    listItem.style.marginBottom = "20px";
+
+                    const title = document.createElement("h3");
+                    title.innerText = article.title || "No title";
+                    title.style.marginBottom = "5px";
+
+                    const description = document.createElement("p");
+                    description.innerText = article.description || "No description";
+
+                    const link = document.createElement("a");
+                    link.href = article.url;
+                    link.target = "_blank";
+                    link.innerText = "Read more";
+                    link.style.color = "#2980b9";
+                    link.style.textDecoration = "none";
+
+                    listItem.appendChild(title);
+                    listItem.appendChild(description);
+                    listItem.appendChild(link);
+                    newsList.appendChild(listItem);
+                });
+            } catch (err) {
+                console.error("Error fetching news:", err);
+                document.getElementById("newsList").innerHTML = "<li>Failed to load news.</li>";
+            }
+        }
+
+        function openAddModal() {
+            document.getElementById('addShopModal').style.display = 'flex';
+        }
+
+        function closeAddModal() {
+            document.getElementById('addShopModal').style.display = 'none';
+        }
+
+        async function submitShop() {
+            const shopData = {
+                store_name: document.getElementById('storeName').value,
+                owner_name: document.getElementById('ownerName').value,
+                shopkeeper_name: document.getElementById('shopkeeperName').value,
+                contact: document.getElementById('contact').value,
+                address: document.getElementById('address').value,
+                shopkeeper_id: document.getElementById('shopkeeperId').value
+            };
+
+            try {
+                const res = await fetch('/create_store', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(shopData)
+                });
+
+                const data = await res.json();
+
+                if (data.store_id) {
+                    closeAddModal();
+                    ['storeName', 'ownerName', 'shopkeeperName', 'contact', 'address'].forEach(id => {
+                        document.getElementById(id).value = '';
+                    });
+                    loadStores();
+                } else {
+                    alert("Error: " + data.error);
+                }
+            } catch (err) {
+                console.error('Error creating store:', err);
+                alert('Failed to create store. Please try again.');
+            }
+        }
+
+        function loadStores() {
+            fetch('/get_my_stores')
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        const storeContainer = document.getElementById('store-cards-container');
+                        storeContainer.innerHTML = '';
+
+                        data.stores.forEach(store => {
+                            const card = document.createElement('div');
+                            card.classList.add('store-card');
+                            card.innerHTML = `
+                        <h3>${store.store_name}</h3>
+                        <p><strong>Store ID:</strong> ${store.store_id}</p>
+                        <p><strong>Address:</strong> ${store.address}</p>
+                        <p><strong>Contact:</strong> ${store.contact}</p>
+                        <button onclick="openInventory('${store.store_id}', '${store.store_name.replace(/'/g, "\\'")}')">Manage Inventory</button>
+                    `;
+                            storeContainer.appendChild(card);
+                        });
+                    } else {
+                        alert(data.message || 'Error loading stores');
+                    }
+                })
+                .catch(error => console.error('Error fetching stores:', error));
+        }
+
+        async function saveUpdate(storeId) {
+            const updatedData = {
+                store_id: storeId,
+                store_name: document.getElementById(`name-${storeId}`).value,
+                owner_name: document.getElementById(`owner-${storeId}`).value,
+                shopkeeper_name: document.getElementById(`keeper-${storeId}`).value,
+                contact: document.getElementById(`contact-${storeId}`).value,
+                address: document.getElementById(`address-${storeId}`).value
+            };
+
+            try {
+                const res = await fetch('/update_store', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(updatedData)
+                });
+
+                const data = await res.json();
+                if (data.success) {
+                    loadStores();
+                } else {
+                    alert("Update failed: " + (data.message || 'Unknown error'));
+                }
+            } catch (err) {
+                console.error('Error updating store:', err);
+                alert('Failed to update store. Please try again.');
+            }
+        }
+
+        function enableEdit(id) {
+            ["name", "owner", "keeper", "contact", "address"].forEach(field => {
+                document.getElementById(`${field}-${id}`).disabled = false;
+            });
+
+            const updateBtn = document.querySelector(`#name-${id}`).parentNode.querySelector('button');
+            updateBtn.innerText = "Save";
+            updateBtn.onclick = () => saveUpdate(id);
+        }
+
+        function goToInventory(storeId) {
+            window.location.href = `/manage_inventory/${storeId}`;
+        }
+
+        let currentStoreId = '';
+        let currentStoreName = '';
+
+        function openInventory(storeId, storeName) {
+            console.log("Store ID:", storeId, "Store Name:", storeName);
+            currentStoreId = storeId;
+            currentStoreName = storeName;
+            document.getElementById("inventoryPanel").style.display = "block";
+            document.getElementById("storeTitle").innerText = `Inventory - ${storeName}`;
+            loadInventory();
+        }
+
+        function closeInventoryPanel() {
+            document.getElementById("inventoryPanel").style.display = "none";
+            document.getElementById("inventoryCards").innerHTML = '';
+        }
+
+        async function addMedicine() {
+            const symptomsInput = document.getElementById("symptoms").value.trim();
+            const symptomsArray = symptomsInput
+                .split(/[\s,]+/)
+                .map(s => s.trim())
+                .filter(s => /^[a-zA-Z]+$/.test(s));
+
+            if (symptomsArray.length === 0) {
+                alert("Please enter valid symptoms (e.g. fever, cold)");
+                return;
+            }
+
+            const payload = {
+                store_id: currentStoreId,
+                medicine_name: document.getElementById("medicineName").value.trim(),
+                brand: document.getElementById("brand").value.trim(),
+                price: parseFloat(document.getElementById("price").value),
+                quantity: parseInt(document.getElementById("quantity").value),
+                symptoms: symptomsArray
+            };
+
+            // Basic validation
+            if (!payload.medicine_name || !payload.brand || isNaN(payload.price) || isNaN(payload.quantity) || payload.quantity < 0 || payload.price < 0) {
+                alert("Please fill out all fields correctly.");
+                return;
+            }
+
+            try {
+                const res = await fetch("/add_inventory", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify(payload)
+                });
+
+                const data = await res.json();
+                if (data.success) {
+                    loadInventory();
+                    ["medicineName", "brand", "price", "quantity", "symptoms"].forEach(id => {
+                        document.getElementById(id).value = '';
+                    });
+                } else {
+                    alert("Error: " + (data.message || "Failed to add medicine"));
+                }
+
+            } catch (err) {
+                console.error("Error adding medicine:", err);
+                alert("Something went wrong. Check the console for details.");
+            }
+        }
+
+
+
+        function loadInventory() {
+            fetch(`/get_inventory/${currentStoreId}`)
+                .then(res => res.json())
+                .then(data => {
+                    const container = document.getElementById("inventoryCards");
+                    container.innerHTML = '';
+                    data.inventory.forEach(item => {
+                        const card = document.createElement("div");
+                        card.style = "background-color: white; color: #333; border-radius: 8px; padding: 12px; width: 250px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;";
+                        card.innerHTML = `
+                    <strong style="font-size: 18px; color: #2c3e50;">${item.medicine_name}</strong><br>
+                    <span>Brand: ${item.brand}</span><br>
+                    <span>Price: <input type="number" value="${item.price}" id="price-${item._id}" style="width: 80px; border: 1px solid #ccc; border-radius: 6px; padding: 6px; font-size: 14px;"></span><br>
+                    <span>Qty: <input type="number" value="${item.quantity}" id="qty-${item._id}" style="width: 60px; border: 1px solid #ccc; border-radius: 6px; padding: 6px; font-size: 14px;"></span><br>
+                    <button onclick="updateInventory('${item._id}', '${item.medicine_name}', '${item.brand}')"
+                            style="background-color: #2c3e50; color:white; padding:8px 15px; font-size:16px; width:100%; border:none; border-radius:6px; margin-top:10px; cursor:pointer; transition: background-color 0.3s ease;">
+                        Update
+                    </button>
+                `;
+                        container.appendChild(card);
+                    });
+                });
+        }
+
+
+        function updateInventory(itemId, name, brand) {
+            const newPrice = parseFloat(document.getElementById(`price-${itemId}`).value);
+            const newQty = parseInt(document.getElementById(`qty-${itemId}`).value);
+
+            fetch("/update_inventory", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({
+                    store_id: currentStoreId,
+                    medicine_name: name,
+                    brand: brand,
+                    price: newPrice,
+                    quantity: newQty
+                })
+            })
+                .then(res => res.json())
+                .then(data => {
+                    alert("Updated successfully");
+                    loadInventory();
+                });
+        }
+
+        function logout() {
+            window.location.href = "/logout";
+        }
+
+        window.onload = function () {
+            loadStores();
+        };
+        console.log("Payload being sent:", payload);
+
+    </script>
+</body>
+
+</html>
